@@ -1,1 +1,2 @@
-print("HELLO WORLD")
+name = "Wally Bayola"
+print(name)
