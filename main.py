@@ -20,12 +20,12 @@ def Introduction():
 Introduction()
 
 # Standard Naming Convention
-# if the variable holds Function, the first letter must be Capitalized and dont use snake method.(Ex. "MyName" or if one sentence "Name")
-# if the variable holds inside function, use snake method. (Ex. "my_Name" or if one sentence "name")
+# if the variable holds Function, the first letter must be Capitalized and dont use snake method.(Ex. "MyName" or if one word "Name")
+# if the variable holds inside function, use snake method. (Ex. "my_Name" or if one word "name")
 
-def Error():
+def Error(error_Name):
     print("_________________________________________")
-    print("\n   ERROR!! Press Enter to try again")
+    print(f"\n   {error_Name}!! Press Enter to try again")
     error = input("_________________________________________\n")
                                                                                                                                                                                                  
 def CLearScreen():
@@ -42,18 +42,34 @@ def IsNumber(str_Number):
         if temp == False: return False
     return True
 
+def PrintError():
+    CLearScreen()
+    Introduction()
+    Main()
+
 def Main():
     name = input("Enter your Name: ")
     position = input("Enter your Position: ")
-    work_Salary = input("Enter your Work Salary: ")
-    salary_Rate = input("Enter your Salary Rate: ")
-    ID = input("Enter your ID: ")
-    temp = str(work_Salary + salary_Rate + ID)
+    
+    work_Salary = input("Enter your Work Salary: ") 
+    if not IsNumber(work_Salary): # checks if only contains integer
+        Error("Number ERROR")
+        PrintError()
+        return False
 
-    if not IsNumber(temp):
-        Error()
-        CLearScreen()
-        Introduction()
-        Main()
+    salary_Rate = input("Enter your Salary Rate: ") # checks if only contains integer
+    if not IsNumber(salary_Rate):
+        Error("Number ERROR")
+        PrintError()
+        return False
+
+    ID = input("Enter your ID (6 digits only): ") # checks if only contains integer
+    if not IsNumber(ID):
+        Error("Number ERROR")
+        PrintError()
+        return False
+
     print("SUCCESS")
+
+#Program Starts
 Main()
