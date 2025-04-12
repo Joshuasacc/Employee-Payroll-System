@@ -1,0 +1,18 @@
+Start
+
+INPUT ID, Name, Position, Work Hours, Salary Rate
+
+CALCULATE Gross Salary = Work Hours * Salary Rate
+
+INPUT Deductions (without holding taxes)
+
+COMPUTE Net Salary = Gross Salary - Deductions
+
+OUTPUT Payslip:
+    Display ID, Name, Position
+    Display Work Hours, Salary Rate
+    Display Gross Salary
+    Display Deductions
+    Display Net Salary
+
+End
