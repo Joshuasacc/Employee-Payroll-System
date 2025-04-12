@@ -1,6 +1,6 @@
 import os
 
-s = """
+introduction = """
 ███████╗███╗   ███╗██████╗ ██╗      ██████╗ ██╗   ██╗███████╗███████╗    ██████╗  █████╗ ██╗   ██╗██████╗  ██████╗ ██╗     ██╗     
 ██╔════╝████╗ ████║██╔══██╗██║     ██╔═══██╗╚██╗ ██╔╝██╔════╝██╔════╝    ██╔══██╗██╔══██╗╚██╗ ██╔╝██╔══██╗██╔═══██╗██║     ██║     
 █████╗  ██╔████╔██║██████╔╝██║     ██║   ██║ ╚████╔╝ █████╗  █████╗      ██████╔╝███████║ ╚████╔╝ ██████╔╝██║   ██║██║     ██║     
@@ -14,10 +14,18 @@ s = """
 ╚════██║  ╚██╔╝  ╚════██║   ██║   ██╔══╝  ██║╚██╔╝██║                                                                              
 ███████║   ██║   ███████║   ██║   ███████╗██║ ╚═╝ ██║                                                                              
 ╚══════╝   ╚═╝   ╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝                 
-"""         
-print(s)
+"""  
+print(introduction)
 
-def is_Number(str_Number):
+def Error():
+    print("_________________________________________")
+    print("\n   ERROR!! Press Enter to try again")
+    error = input("_________________________________________\n")
+                                                                                                                                                                                                 
+def CLearScreen():
+    print("\n" * 100)
+
+def IsNumber(str_Number):
     array_Number = [0,1,2,3,4,5,6,7,8,9]
     for i in range(0, len(str_Number)):
         temp = False
@@ -36,4 +44,9 @@ def Main():
     ID = input("Enter your ID: ")
     temp = str(work_Salary + salary_Rate + ID)
 
+    if not IsNumber(temp):
+        Error()
+        CLearScreen()
+        print(introduction)
+        Main()
 Main()
