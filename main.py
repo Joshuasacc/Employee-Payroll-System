@@ -42,7 +42,7 @@ def IsNumber(str_Number):
         if temp == False: return False
     return True
 
-def PrintError():
+def PrintError(error_name):
     CLearScreen()
     Introduction()
     Main()
@@ -50,26 +50,26 @@ def PrintError():
 def Main():
     name = input("Enter your Name: ")
     position = input("Enter your Position: ")
-    
+
     work_Salary = input("Enter your Work Salary: ") 
     if not IsNumber(work_Salary): # checks if only contains integer
-        Error("Number ERROR")
-        PrintError()
+        PrintError("Number ERROR")
         return False
 
     salary_Rate = input("Enter your Salary Rate: ") # checks if only contains integer
     if not IsNumber(salary_Rate):
-        Error("Number ERROR")
-        PrintError()
+        PrintError("Number ERROR")
         return False
 
     ID = input("Enter your ID (6 digits only): ") # checks if only contains integer
     if not IsNumber(ID):
-        Error("Number ERROR")
-        PrintError()
+        PrintError("Number ERROR")
         return False
 
+    work_Salary = int(work_Salary)
+    salary_Rate = int(salary_Rate)
+    ID = int(ID)
     print("SUCCESS")
-
+    return True
 #Program Starts
 Main()
