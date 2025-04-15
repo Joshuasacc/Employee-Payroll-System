@@ -1,4 +1,15 @@
 import os
+def Successfull():
+    success = """ 
+    ██████╗  █████╗ ██╗   ██╗███████╗██╗     ██╗██████╗ 
+    ██╔══██╗██╔══██╗╚██╗ ██╔╝██╔════╝██║     ██║██╔══██╗
+    ██████╔╝███████║ ╚████╔╝ ███████╗██║     ██║██████╔╝
+    ██╔═══╝ ██╔══██║  ╚██╔╝  ╚════██║██║     ██║██╔═══╝ 
+    ██║     ██║  ██║   ██║   ███████║███████╗██║██║     
+    ╚═╝     ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝╚═╝╚═╝     
+                                                                                                                                                                                    
+    """
+    print(success)
 
 def Introduction():
     introduction = """
@@ -43,14 +54,23 @@ def IsNumber(str_Number):
     return True
 
 def PrintError(error_name):
+    Error(error_name)
     CLearScreen()
     Introduction()
     Main()
+
+def GrossSalary(work_Salary, salary_Rate):
+    return work_Salary * salary_Rate
 
 def Main():
     name = input("Enter your Name: ")
     position = input("Enter your Position: ")
 
+    ID = input("Enter your ID (6 digits only): ") # checks if only contains integer
+    if not IsNumber(ID):
+        PrintError("Number ERROR")
+        return False
+    
     work_Salary = input("Enter your Work Salary: ") 
     if not IsNumber(work_Salary): # checks if only contains integer
         PrintError("Number ERROR")
@@ -61,15 +81,11 @@ def Main():
         PrintError("Number ERROR")
         return False
 
-    ID = input("Enter your ID (6 digits only): ") # checks if only contains integer
-    if not IsNumber(ID):
-        PrintError("Number ERROR")
-        return False
-
     work_Salary = int(work_Salary)
     salary_Rate = int(salary_Rate)
     ID = int(ID)
-    print("SUCCESS")
+
+    Successfull()
     return True
 #Program Starts
 Main()
