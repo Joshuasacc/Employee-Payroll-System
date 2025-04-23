@@ -10,3 +10,24 @@ def Introduction():
     """  
     print(introduction)
 
+file = open("Data.txt", "w")
+file.write("12345,joshua,software dev,20000,100\n")
+file.close()
+
+
+name = ID = role = work_salary = salary_rate = ""
+file = open("Data.txt", "r")
+for line in file:
+    info = line.strip().split(",")
+    if info[0] == "12345":
+        name = info[0]
+        ID = info[1]
+        role = info[2]
+        work_salary = info[3]
+        salary_rate = info[4]
+file.close()
+
+gross_salary = 8 * salary_rate
+net_salary = gross_salary - (gross_salary * 4 / 100)
+
+
