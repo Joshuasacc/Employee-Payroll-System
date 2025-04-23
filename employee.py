@@ -17,7 +17,6 @@ def Error(error_Name):
     print(f"\n   {error_Name}!! Press Enter to try again")
     error = input("_________________________________________________________________________________________________\n")
 
-
 def PaySlip(name, ID, role, work_salary):
     standard_hours = 160 # Standard rate
     salary_rate = work_salary // standard_hours  # Integer division
@@ -67,7 +66,6 @@ while True:
             name = info[1]
             role = info[2]
             work_salary = info[3]
-            salary_rate = info[4]
             found = True
             break
     file.close()
