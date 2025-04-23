@@ -1,5 +1,3 @@
-import os
-
 def Introduction():
     introduction = """
      █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗    ███████╗██╗   ██╗███████╗████████╗███████╗███╗   ███╗
@@ -75,6 +73,18 @@ def AddEmployee():
         position = input("Enter your Position: ")
 
         ID = input("Enter your ID (6 digits only): ") 
+        file = open("Data.txt", "r")
+
+        is_duplicated = False
+        for line in file:
+            temp = line.strip().split(",")
+            if(temp[0] == ID):
+                is_duplicated = True
+        file.close()
+        if is_duplicated:
+            PrintError("ID must be a 6-digit number")
+            continue
+
         if len(ID) != 6:
             PrintError("ID must be a 6-digit number")
             continue
