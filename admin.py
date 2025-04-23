@@ -29,49 +29,52 @@ def PrintError(error_name):
 def CLearScreen():
     print("\n" * 100)
 
-def IsNumber(str_Number):
-    array_Number = [0,1,2,3,4,5,6,7,8,9]
-    for i in range(0, len(str_Number)):
-        temp = False
-        for k in range(0, len(array_Number)):
-            if str_Number[i] == str(array_Number[k]):
-                temp = True
+def IsNumber(str_number):
+    numbers = "0123456789"
+    for char in str_number:
+        found = False
+        for num in numbers:
+            if char == num:
+                found = True
                 break
-        if temp == False: return False
+        if not found:
+            return False
     return True
 
 def AddEmployee():
     def GrossSalary(work_Salary, salary_Rate):
         return work_Salary * salary_Rate
 
-    def Main():
+    while True:
         name = input("Enter your Name: ")
         position = input("Enter your Position: ")
 
         ID = input("Enter your ID (6 digits only): ") 
-        if not IsNumber(ID):
-            PrintError("Number ERROR")
-            Main()
-            return False
+        if len(ID) != 6:
+            PrintError("ID must be a 6-digit number")
+            continue
         
         work_Salary = input("Enter your Work Salary: ") 
         if not IsNumber(work_Salary): 
-            PrintError("Number ERROR")
-            Main()
-            return False
+            PrintError("Work Salary must be a number")
+            continue
 
         salary_Rate = input("Enter your Salary Rate: ") 
         if not IsNumber(salary_Rate):
-            PrintError("Number ERROR")
-            Main()
-            return False
+            PrintError("Salary Rate must be a number")
+            continue
 
+        # Convert to integers after validation
         work_Salary = int(work_Salary)
         salary_Rate = int(salary_Rate)
         ID = int(ID)
-        
-        return True
-    Main()
+        file = open("Data.txt", "a")
+        if file:
+            file.write(f"{ID},{name},{position},{work_Salary},{salary_Rate}\n")
+            file.close()
+            return True
+        return False
+        break
 
 def RemoveEmployee():
     pass
@@ -90,15 +93,14 @@ def AdminChoice():
 4) Edit Employee Data
 
 Enter: """)
-    if IsNumber(choice):
-        choice = int(choice)
-        if choice == 1:
+    if choice:
+        if choice == "1":
             AddEmployee()
-        elif choice == 2:
+        elif choice == "2":
             pass
-        elif choice == 3:
+        elif choice == "3":
             pass
-        elif choice == 4:
+        elif choice == "4":
             pass
         else:
             PrintError("Only digits 1-4 only")
