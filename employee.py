@@ -17,6 +17,34 @@ def Error(error_Name):
     print(f"\n   {error_Name}!! Press Enter to try again")
     error = input("_________________________________________________________________________________________________\n")
 
+
+def PaySlip(name, ID, role, work_salary):
+    standard_hours = 160 # Standard rate
+    salary_rate = work_salary // standard_hours  # Integer division
+    gross_salary = work_salary * salary_rate
+    tax_deduction = gross_salary * 4 / 100
+    net_salary = gross_salary - tax_deduction
+
+    table = f""" 
+                                    ============================================================
+                                                        EMPLOYEE PAYSLIP
+                                    ============================================================
+                                    Employee ID      : {ID}
+                                    Name             : {name}
+                                    Position         : {role}
+
+                                    --------------------- SALARY DETAILS -----------------------
+                                    Work Salary       : {work_salary} (hours)
+                                    Rate per Hour     : ₱{salary_rate}
+                                    Gross Salary      : ₱{gross_salary}
+                                    Tax Deduction (4%): ₱{tax_deduction}
+                                    ------------------------------------------------------------
+                                    NET SALARY        : ₱{net_salary}
+                                    ============================================================
+                                            THANK YOU FOR YOUR HARD WORK THIS MONTH!
+                                    ============================================================
+    """
+    print(table)
 # Execution
 CLearScreen()
 Introduction()
@@ -47,9 +75,5 @@ while True:
     if not found:
         print("696!! Employee Not Found!")
     else:
-        print(f"Name: {name}")
-        print(f"ID: {ID}")
-        print(f"Role: {role}")
-        print(f"Work Salary: {work_salary}")
-        print(f"Salary Rate: {salary_rate}")
+        PaySlip(name, ID, role, int(work_salary))
     break

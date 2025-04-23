@@ -41,6 +41,32 @@ def IsNumber(str_number):
             return False
     return True
 
+def PaySlip(name, ID, role, salary_rate, work_salary):
+    gross_salary = work_salary * salary_rate
+    tax_deduction = gross_salary * 4 / 100
+    net_salary = gross_salary - tax_deduction
+
+    table = f""" 
+                                    ============================================================
+                                                        EMPLOYEE PAYSLIP
+                                    ============================================================
+                                    Employee ID      : {ID}
+                                    Name             : {name}
+                                    Position         : {role}
+
+                                    --------------------- SALARY DETAILS -----------------------
+                                    Work Salary       : {work_salary} (hours)
+                                    Rate per Hour     : ₱{salary_rate}
+                                    Gross Salary      : ₱{gross_salary}
+                                    Tax Deduction (4%): ₱{tax_deduction}
+                                    ------------------------------------------------------------
+                                    NET SALARY        : ₱{net_salary}
+                                    ============================================================
+                                            THIS IS A SAMPLE PAYSLIP FOR EMPLOYEE
+                                    ============================================================
+    """
+    print(table)
+
 def AddEmployee():
     while True:
         name = input("Enter your Name: ")
@@ -54,11 +80,6 @@ def AddEmployee():
         work_Salary = input("Enter your Work Salary: ") 
         if not IsNumber(work_Salary): 
             PrintError("Work Salary must be a number")
-            continue
-
-        salary_Rate = input("Enter your Salary Rate: ") 
-        if not IsNumber(salary_Rate):
-            PrintError("Salary Rate must be a number")
             continue
 
         # Convert to integers after validation
@@ -77,7 +98,35 @@ def RemoveEmployee():
     pass
 
 def RetrieveEmployee():
-    pass
+    while True:
+        employee_ID = input("Enter Employee's ID (6-digits only): ")
+        if len(employee_ID) != 6:
+            Error("Error!! It might be not enough length or employee does not exists")
+            CLearScreen()
+            Introduction()
+            continue
+
+        # Initialize default state
+        found = False
+        file = open("Data.txt", "r")
+        for line in file:
+            info = line.strip().split(",")
+            if info[0] == employee_ID:
+                ID = info[0]
+                name = info[1]
+                role = info[2]
+                work_salary = info[3]
+                salary_rate = info[4]
+                found = True
+                break
+        file.close()
+
+        if not found:
+            print("696!! Employee Not Found!")
+        else:
+            PaySlip(name,ID,role,int(salary_rate), int(work_salary))
+        break
+
 
 def EditEmployee():
     pass
