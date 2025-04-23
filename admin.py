@@ -154,28 +154,38 @@ def RemoveEmployee():
 
 def EditEmployee():
     input_ID = input("Enter Employee ID (6 digits): ")
-    file = open("Data.txt", "r")
-    lines = file.readlines()
-    file.close()
 
+    file = open("Data.txt", "r")
     new_lines = []
     does_exists = False
-    for line in lines:
+
+    for line in file:
         temp = line.strip().split(",")
         if temp[0] == input_ID:
-            print("Current data:", temp)
+            print("Current data:")
+            print("______________________\n")
+            print(f"Name: {temp[1]}\nRole: {temp[2]}\nWork Salary: {temp[3]}")
+            print("______________________")
+
             new_name = input("Enter new name: ")
             if new_name == "":
                 new_name = temp[1]
+
             new_position = input("Enter new position: ")
             if new_position == "":
                 new_position = temp[2]
+
             new_salary = input("Enter new salary: ")
             if new_salary == "":
                 new_salary = temp[3]
+
             edited_line = f"{temp[0]},{new_name},{new_position},{new_salary}\n"
             new_lines.append(edited_line)
             does_exists = True
+        else:
+            new_lines.append(line)  # Keep unedited employee data
+
+    file.close()
 
     if does_exists:
         file = open("Data.txt", "w")
@@ -184,11 +194,12 @@ def EditEmployee():
         file.close()
         print("✅ Data successfully updated!")
     else:
-        Error("Employee Not Found")
+        print("❌ Employee Not Found")
+
 
 def ShowEmployeeData():
     file = open("Data.txt", "r")
-    print("\nEmployees Data:")
+    print("\nEmployee's Data:")
     print("________________________\n")
     count = 0
     for i in file:
