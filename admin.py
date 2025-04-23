@@ -42,9 +42,6 @@ def IsNumber(str_number):
     return True
 
 def AddEmployee():
-    def GrossSalary(work_Salary, salary_Rate):
-        return work_Salary * salary_Rate
-
     while True:
         name = input("Enter your Name: ")
         position = input("Enter your Position: ")
@@ -97,11 +94,11 @@ Enter: """)
         if choice == "1":
             AddEmployee()
         elif choice == "2":
-            pass
+            RemoveEmployee()
         elif choice == "3":
-            pass
+            RetrieveEmployee()
         elif choice == "4":
-            pass
+            EditEmployee()
         else:
             PrintError("Only digits 1-4 only")
             AdminChoice()
