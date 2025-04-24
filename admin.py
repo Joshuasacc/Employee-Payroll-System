@@ -162,7 +162,7 @@ def RetrieveEmployee():
 def RemoveEmployee(): # Re-structured this
     remove_ID = input("Enter the Employee ID to remove: ")
 
-    file = open("data.txt", "r")
+    file = open("Data.txt", "r")
     new_lines = []
     found = False
 
@@ -175,7 +175,7 @@ def RemoveEmployee(): # Re-structured this
 
     file.close()
 
-    file = open("data.txt", "w")
+    file = open("Data.txt", "w")
     for line in new_lines:
         file.write(line)
     file.close()
@@ -250,7 +250,7 @@ def ShowEmployeeData():
         print(f"{count}) Name: {name} | ID: {ID}")
     file.close()
 
-    # Check if data is empty nigga
+    # Check if data is empty 
     if is_empty == "":
         print("Employee Not Found")
     print("\n________________________")
