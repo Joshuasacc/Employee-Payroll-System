@@ -234,6 +234,7 @@ def EditEmployee():
         Error("Employee Not Found")
 
 
+
 def ShowEmployeeData():
     file = open("Data.txt", "r")
     print("\nEmployees Data:")
