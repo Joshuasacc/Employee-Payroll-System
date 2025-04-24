@@ -44,7 +44,7 @@ def IsNumber(str_number):
             return False
     return True
 
-def PaySlip(name, ID, role, work_salary):
+def PaySlip(name, ID, role, work_salary, salary_rate):
     standard_hours = 160 # Standard rate
     salary_rate = work_salary // standard_hours  # Integer division
     gross_salary = work_salary * salary_rate
