@@ -188,41 +188,42 @@ def RemoveEmployee(): # Re-structured this
 
 
 def EditEmployee():
-    input_ID = input("Enter Employee ID (6 digits): ")
+    while True:
+        input_ID = input("Enter Employee ID (6 digits): ")
 
-    file = open("Data.txt", "r")
-    lines = file.readlines()
-    file.close()
+        file = open("Data.txt", "r")
+        lines = file.readlines()
+        file.close()
 
-    new_lines = []
-    does_exist = False
+        new_lines = []
+        does_exist = False
 
-    for line in lines:
-        temp = line.strip().split(",")
-        if temp[0] == input_ID:
-            print("Current data:", temp)
+        for line in lines:
+            temp = line.strip().split(",")
+            if temp[0] == input_ID:
+                print("Current data:", temp)
 
-            new_name = input("Enter new name: ").strip()
-            if new_name == "":
-                new_name = temp[1]
+                new_name = input("Enter new name: ").strip()
+                if new_name == "":
+                    new_name = temp[1]
 
-            new_position = input("Enter new position: ").strip()
-            if new_position == "":
-                new_position = temp[2]
+                new_position = input("Enter new position: ").strip()
+                if new_position == "":
+                    new_position = temp[2]
 
-            new_salary = input("Enter new salary: ").strip()
-            if new_salary == "":
-                new_salary = temp[3]
+                new_salary = input("Enter new salary: ").strip()
+                if new_salary == "":
+                    new_salary = temp[3]
 
-            new_salary_rate = input("Enter new salary rate: ").strip()
-            if new_salary_rate == "":
-                new_salary_rate = temp[4]
+                new_salary_rate = input("Enter new salary rate: ").strip()
+                if new_salary_rate == "":
+                    new_salary_rate = temp[4]
 
-            edited_line = f"{temp[0]},{new_name},{new_position},{new_salary},{new_salary_rate}\n"
-            new_lines.append(edited_line)
-            does_exist = True
-        else:
-            new_lines.append(line)  # Keep unchanged lines
+                edited_line = f"{temp[0]},{new_name},{new_position},{new_salary},{new_salary_rate}\n"
+                new_lines.append(edited_line)
+                does_exist = True
+            else:
+                new_lines.append(line)  # Keep unchanged lines
 
     if does_exist:
         file = open("Data.txt", "w")
