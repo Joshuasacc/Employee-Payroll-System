@@ -221,18 +221,18 @@ def EditEmployee():
 
                 edited_line = f"{temp[0]},{new_name},{new_position},{new_salary},{new_salary_rate}\n"
                 new_lines.append(edited_line)
-                does_exist = True
+                break
             else:
                 new_lines.append(line)  # Keep unchanged lines
 
-    if does_exist:
-        file = open("Data.txt", "w")
-        for line in new_lines:
-            file.write(line)
-        file.close()
-        print("✅ Data successfully updated!")
-    else:
-        Error("Employee Not Found")
+        if does_exist:
+            file = open("Data.txt", "w")
+            for line in new_lines:
+                file.write(line)
+            file.close()
+            print("✅ Data successfully updated!")
+        else:
+            Error("Employee Not Found")
 
 
 
