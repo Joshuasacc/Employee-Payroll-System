@@ -1,3 +1,5 @@
+import os
+
 def Introduction():
     introduction = """
      █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗    ███████╗██╗   ██╗███████╗████████╗███████╗███╗   ███╗
@@ -73,18 +75,6 @@ def AddEmployee():
         position = input("Enter your Position: ")
 
         ID = input("Enter your ID (6 digits only): ") 
-        file = open("Data.txt", "r")
-
-        is_duplicated = False
-        for line in file:
-            temp = line.strip().split(",")
-            if(temp[0] == ID):
-                is_duplicated = True
-        file.close()
-        if is_duplicated:
-            PrintError("ID must be a 6-digit number")
-            continue
-
         if len(ID) != 6:
             PrintError("ID must be a 6-digit number")
             continue
@@ -106,33 +96,31 @@ def AddEmployee():
         return False
 
 def RetrieveEmployee():
-    while True:
-        employee_ID = input("Enter Employee's ID (6-digits only): ")
-        if len(employee_ID) != 6:
-            Error("Error!! It might be not enough length or employee does not exists")
-            CLearScreen()
-            Introduction()
-            continue
+    employee_ID = input("Enter Employee's ID (6-digits only): ")
+    if len(employee_ID) != 6:
+        Error("Error!! It might be not enough length or employee does not exists")
+        RetrieveEmployee()
 
-        # Initialize default state
-        found = False
-        file = open("Data.txt", "r")
-        for line in file:
-            info = line.strip().split(",")
-            if info[0] == employee_ID:
-                ID = info[0]
-                name = info[1]
-                role = info[2]
-                work_salary = info[3]
-                found = True
-                break
-        file.close()
+    # Initialize default state
+    found = False
+    file = open("Data.txt", "r")
+    for line in file:
+        info = line.strip().split(",")
+        if info[0] == employee_ID:
+            ID = info[0]
+            name = info[1]
+            role = info[2]
+            work_salary = info[3]
+            found = True
+            break
+    file.close()
 
-        if not found:
-            Error("696!! Employee Not Found!")
-        else:
-            PaySlip(name,ID,role, int(work_salary))
-        break
+    if not found:
+        Error("69!! Error")
+        RetrieveEmployee()
+        
+    else:
+        PaySlip(name,ID,role, int(work_salary))
 
 
 def RemoveEmployee():
@@ -164,38 +152,28 @@ def RemoveEmployee():
 
 def EditEmployee():
     input_ID = input("Enter Employee ID (6 digits): ")
-
     file = open("Data.txt", "r")
+    lines = file.readlines()
+    file.close()
+
     new_lines = []
     does_exists = False
-
-    for line in file:
+    for line in lines:
         temp = line.strip().split(",")
         if temp[0] == input_ID:
-            print("Current data:")
-            print("______________________\n")
-            print(f"Name: {temp[1]}\nRole: {temp[2]}\nWork Salary: {temp[3]}")
-            print("______________________")
-
+            print("Current data:", temp)
             new_name = input("Enter new name: ")
             if new_name == "":
                 new_name = temp[1]
-
             new_position = input("Enter new position: ")
             if new_position == "":
                 new_position = temp[2]
-
             new_salary = input("Enter new salary: ")
             if new_salary == "":
                 new_salary = temp[3]
-
             edited_line = f"{temp[0]},{new_name},{new_position},{new_salary}\n"
             new_lines.append(edited_line)
             does_exists = True
-        else:
-            new_lines.append(line)  # Keep unedited employee data
-
-    file.close()
 
     if does_exists:
         file = open("Data.txt", "w")
@@ -204,12 +182,11 @@ def EditEmployee():
         file.close()
         print("✅ Data successfully updated!")
     else:
-        print("❌ Employee Not Found")
-
+        Error("Employee Not Found")
 
 def ShowEmployeeData():
     file = open("Data.txt", "r")
-    print("\nEmployee's Data:")
+    print("\nEmployees Data:")
     print("________________________\n")
     count = 0
     for i in file:
