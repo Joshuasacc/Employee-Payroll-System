@@ -225,15 +225,15 @@ def EditEmployee():
             else:
                 new_lines.append(line)  # Keep unchanged lines
 
-    if does_exist:
-        file = open("Data.txt", "w")
-        for line in new_lines:
-            file.write(line)
-        file.close()
-        print("✅ Data successfully updated!")
-    else:
-        Error("Employee Not Found")
-
+        if does_exist:
+            file = open("Data.txt", "w")
+            for line in new_lines:
+                file.write(line)
+            file.close()
+            print("✅ Data successfully updated!")
+            break
+        else:
+            Error("Employee Not Found. Press Enter to try again.")
 
 
 def ShowEmployeeData():
@@ -301,7 +301,7 @@ Enter: """)
             elif confirm.lower() == "n":
                 Introduction()
                 AdminChoice()
-                continue
+                break
     else:
         PrintError("Only digits 1-6 only")
         AdminChoice()
