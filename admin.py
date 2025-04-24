@@ -92,17 +92,23 @@ def AddEmployee():
 
     work_Salary = input("Enter your Work Salary: ") 
     if not IsNumber(work_Salary): 
-        PrintError("Work Salary must be a number")
+        Error("Work Salary must be a number")
+        AddEmployee()
         return False
 
     salary_rate = input("Enter Employee Salary Rate: ") 
     if not IsNumber(salary_rate): 
-        PrintError("Salary Rate must be a number")
+        Error("Salary Rate must be a number")
+        AddEmployee()
         return False
     
-    # Convert to integers after validation
     salary_rate = int(salary_rate)
     work_Salary = int(work_Salary)
+    if work_Salary < salary_rate:
+        Error("Wrong salary distribution")
+        AddEmployee()
+        return False
+    # Convert to integers after validation
 
     ID = int(ID)
     file = open("Data.txt", "a")
