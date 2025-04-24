@@ -109,7 +109,6 @@ def AddEmployee():
         AddEmployee()
         return False
     # Convert to integers after validation
-
     ID = int(ID)
     file = open("Data.txt", "a")
     if file:
@@ -144,7 +143,7 @@ def RetrieveEmployee():
         RetrieveEmployee()
         
     else:
-        PaySlip(name,ID,role, int(work_salary))
+        PaySlip(name,ID,role, int(work_salary), int(salary_rate))
 
 def RemoveEmployee(): # Re-structured this
     remove_ID = input("Enter the Employee ID to remove: ")
