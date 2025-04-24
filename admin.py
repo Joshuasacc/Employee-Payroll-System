@@ -78,7 +78,7 @@ def AddEmployee():
 
     ID = input("Enter your ID (6 digits only): ") 
     if len(ID) != 6 or not IsNumber(ID):
-        Error("ID must be a 6-digit number")
+        Error("Error")
         AddEmployee()
         return False
     
@@ -95,13 +95,19 @@ def AddEmployee():
         PrintError("Work Salary must be a number")
         return False
 
+    salary_rate = input("Enter Employee Salary Rate: ") 
+    if not IsNumber(salary_rate): 
+        PrintError("Salary Rate must be a number")
+        return False
+    
     # Convert to integers after validation
+    salary_rate = int(salary_rate)
     work_Salary = int(work_Salary)
 
     ID = int(ID)
     file = open("Data.txt", "a")
     if file:
-        file.write(f"{ID},{name},{position},{work_Salary}\n")
+        file.write(f"{ID},{name},{position},{work_Salary},{salary_rate}\n")
         file.close()
         return True
     return False
@@ -122,12 +128,13 @@ def RetrieveEmployee():
             name = info[1]
             role = info[2]
             work_salary = info[3]
+            salary_rate = info[4]
             found = True
             break
     file.close()
 
     if not found:
-        Error("69!! Error")
+        Error("69!! Employee Not")
         RetrieveEmployee()
         
     else:
@@ -182,7 +189,11 @@ def EditEmployee():
             new_salary = input("Enter new salary: ")
             if new_salary == "":
                 new_salary = temp[3]
-            edited_line = f"{temp[0]},{new_name},{new_position},{new_salary}\n"
+            new_salary_rate = input("Enter new salary rate: ")
+            if new_salary_rate == "":
+                new_salary_rate = temp[4]
+
+            edited_line = f"{temp[0]},{new_name},{new_position},{new_salary},{new_salary_rate}\n"
             new_lines.append(edited_line)
             does_exists = True
 
@@ -254,7 +265,7 @@ Enter: """)
     elif choice == "6":
         pass
     else:
-        PrintError("Only digits 1-5 only")
+        PrintError("Only digits 1-6 only")
         AdminChoice()
     
 AdminChoice()
