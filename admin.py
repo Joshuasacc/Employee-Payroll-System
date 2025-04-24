@@ -234,6 +234,7 @@ def EditEmployee():
         Error("Employee Not Found")
 
 
+
 def ShowEmployeeData():
     file = open("Data.txt", "r")
     print("\nEmployees Data:")
@@ -299,7 +300,7 @@ Enter: """)
             elif confirm.lower() == "n":
                 Introduction()
                 AdminChoice()
-                break
+                continue
     else:
         PrintError("Only digits 1-6 only")
         AdminChoice()
