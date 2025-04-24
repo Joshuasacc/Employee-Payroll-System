@@ -1,4 +1,7 @@
 import os
+if not os.path.exists("Data.txt"):
+    file = open("Data.txt", "w")
+    file.close()
 
 def Introduction():
     introduction = """
@@ -70,30 +73,38 @@ def PaySlip(name, ID, role, work_salary):
     print(table)
 
 def AddEmployee():
-    while True:
-        name = input("Enter Employee's Name: ")
-        position = input("Enter your Position: ")
+    name = input("Enter Employee's Name: ")
+    position = input("Enter your Position: ")
 
-        ID = input("Enter your ID (6 digits only): ") 
-        if len(ID) != 6:
-            PrintError("ID must be a 6-digit number")
-            continue
-        
-        work_Salary = input("Enter your Work Salary: ") 
-        if not IsNumber(work_Salary): 
-            PrintError("Work Salary must be a number")
-            continue
-
-        # Convert to integers after validation
-        work_Salary = int(work_Salary)
-
-        ID = int(ID)
-        file = open("Data.txt", "a")
-        if file:
-            file.write(f"{ID},{name},{position},{work_Salary}\n")
-            file.close()
-            return True
+    ID = input("Enter your ID (6 digits only): ") 
+    if len(ID) != 6 or not IsNumber(ID):
+        Error("ID must be a 6-digit number")
+        AddEmployee()
         return False
+    
+    file = open("Data.txt", "r")
+    for line in file:
+        temp = line.strip().split(",")
+        if(temp[0] == ID):
+            Error("ID Already existed")
+            AddEmployee()
+            continue
+
+    work_Salary = input("Enter your Work Salary: ") 
+    if not IsNumber(work_Salary): 
+        PrintError("Work Salary must be a number")
+        return False
+
+    # Convert to integers after validation
+    work_Salary = int(work_Salary)
+
+    ID = int(ID)
+    file = open("Data.txt", "a")
+    if file:
+        file.write(f"{ID},{name},{position},{work_Salary}\n")
+        file.close()
+        return True
+    return False
 
 def RetrieveEmployee():
     employee_ID = input("Enter Employee's ID (6-digits only): ")
@@ -122,23 +133,21 @@ def RetrieveEmployee():
     else:
         PaySlip(name,ID,role, int(work_salary))
 
-
-def RemoveEmployee():
+def RemoveEmployee(): # Re-structured this
     remove_ID = input("Enter the Employee ID to remove: ")
 
     file = open("data.txt", "r")
-    lines = file.readlines()
-    file.close()
-
     new_lines = []
     found = False
 
-    for line in lines:
+    for line in file:
         data = line.strip().split(",")
         if data[0] != remove_ID:
             new_lines.append(line)
         else:
             found = True
+
+    file.close()
 
     file = open("data.txt", "w")
     for line in new_lines:
@@ -148,7 +157,9 @@ def RemoveEmployee():
     if found:
         print("\n✅ Employee successfully removed!")
     else:
-        PrintError("Employee ID not found")
+        Error("Employee ID not found")
+        RemoveEmployee()
+
 
 def EditEmployee():
     input_ID = input("Enter Employee ID (6 digits): ")
@@ -161,7 +172,7 @@ def EditEmployee():
     for line in lines:
         temp = line.strip().split(",")
         if temp[0] == input_ID:
-            print("Current data:", temp)
+            print("Current data: ", temp)
             new_name = input("Enter new name: ")
             if new_name == "":
                 new_name = temp[1]
@@ -189,12 +200,20 @@ def ShowEmployeeData():
     print("\nEmployees Data:")
     print("________________________\n")
     count = 0
+
+    is_empty = ""
     for i in file:
         count += 1
         temp = i.strip().split(",")
         ID = temp[0]
         name = temp[1]
+        is_empty += str(temp)
         print(f"{count}) Name: {name} | ID: {ID}")
+    file.close()
+
+    # Check if data is empty nigga
+    if is_empty == "":
+        print("Employee Not Found")
     print("\n________________________")
 def AdminChoice():
     choice = input("""
@@ -203,18 +222,37 @@ def AdminChoice():
 3) Retrieve Employee Data
 4) Edit Employee Data
 5) Show all Employee
+6) Exit
+                   
 Enter: """)
     
     if choice == "1":
         AddEmployee()
+        again = input("\nContinue? (y/n): ")
+        if again.upper() == "Y":
+            AdminChoice()
     elif choice == "2":
         RemoveEmployee()
+        again = input("\nContinue? (y/n): ")
+        if again.upper() == "Y":
+            AdminChoice()
     elif choice == "3":
         RetrieveEmployee()
+        again = input("\nContinue? (y/n): ")
+        if again.upper() == "Y":
+            AdminChoice()
     elif choice == "4":
         EditEmployee()
+        again = input("\nContinue? (y/n): ")
+        if again.upper() == "Y":
+            AdminChoice()
     elif choice == "5":
         ShowEmployeeData()
+        again = input("\nContinue? (y/n): ")
+        if again.upper() == "Y":
+            AdminChoice()
+    elif choice == "6":
+        pass
     else:
         PrintError("Only digits 1-5 only")
         AdminChoice()
