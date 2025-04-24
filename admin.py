@@ -291,7 +291,14 @@ Enter: """)
         if again.upper() == "Y":
             AdminChoice()
     elif choice == "6":
-        pass
+         while True:    
+            confirm = input("Are you sure you want to exit? (y/n): ")
+            if confirm.lower() == "y":
+                print("Exiting program. Goodbye!")
+            elif confirm.lower() == "n":
+                Introduction()
+                AdminChoice()
+                break
     else:
         PrintError("Only digits 1-6 only")
         AdminChoice()
