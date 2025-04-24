@@ -76,12 +76,24 @@ def AddEmployee():
     name = input("Enter Employee's Name: ")
     position = input("Enter your Position: ")
 
-    ID = input("Enter your ID (6 digits only): ") 
-    if len(ID) != 6 or not IsNumber(ID):
-        Error("Error")
-        AddEmployee()
-        return False
-    
+    while True:
+        ID = input("Enter your ID (6 digits only): ") 
+        if len(ID) == 6 and IsNumber(ID):
+            file = open("Data.txt", "r")
+            is_registered = False
+            for line in file:
+                temp = line.strip().split(",")
+                if temp[0] == ID:
+                    is_registered = True
+                    break
+            file.close()
+            if not is_registered:
+                break
+            else:
+                Error("ID already exists. Please enter a unique ID.")
+        else:
+            Error("ID must be 6 digits and numeric.")
+
     file = open("Data.txt", "r")
     for line in file:
         temp = line.strip().split(",")
