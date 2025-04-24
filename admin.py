@@ -296,10 +296,11 @@ Enter: """)
             confirm = input("Are you sure you want to exit? (y/n): ")
             if confirm.lower() == "y":
                 print("Exiting program. Goodbye!")
+                break
             elif confirm.lower() == "n":
                 Introduction()
                 AdminChoice()
-                break
+                continue
     else:
         PrintError("Only digits 1-6 only")
         AdminChoice()
