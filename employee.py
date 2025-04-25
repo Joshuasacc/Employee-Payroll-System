@@ -90,8 +90,22 @@ while True:
             break
     file.close()
 
-    if not found:
-        print("696!! Employee Not Found!")
-    else:
-        PaySlip(name, ID, role, int(work_salary), int(salary_rate))
-    break
+    while True:
+        if not found:
+            print("696!! Employee Not Found! Please try again")
+        elif found:  # Provide a valid condition for elif
+            PaySlip(name, ID, role, int(work_salary), int(salary_rate))
+            want_again = input("Do you want to check another employee? (Y/N): ").strip().upper()
+            if want_again.upper() == 'Y' or want_again.upper() == 'YES':
+                CLearScreen()
+                Introduction()
+                break
+            elif want_again.upper() == 'N' or want_again.upper() == 'NO':
+                print("Thank you for using the program!")
+                exit()
+            else:
+                Error("Invalid input! Please enter 'Y', 'YES', 'N', or 'NO'")
+                CLearScreen()
+                Introduction()
+                continue
+        break
