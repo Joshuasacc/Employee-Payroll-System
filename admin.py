@@ -269,29 +269,64 @@ Enter: """)
     
     if choice == "1":
         AddEmployee()
-        again = input("\nContinue? (y/n): ")
-        if again.upper() == "Y":
-            AdminChoice()
+        while True:
+            again = input("\nContinue? (y/n): ")
+            if again.upper() == "Y" or again.upper() == "YES":
+                AdminChoice()
+                break
+            elif again.upper() == "N" or again.upper() == "NO":
+                print("Exit")
+                break
+            else:
+                Error("Invalid input. Please enter 'y' or 'n'.")
     elif choice == "2":
         RemoveEmployee()
-        again = input("\nContinue? (y/n): ")
-        if again.upper() == "Y":
-            AdminChoice()
+        while True:
+            again = input("\nContinue? (y/n): ")
+            if again.upper() == "Y" or again.upper() == "YES":
+                AdminChoice()
+                break
+            elif again.upper() == "N" or again.upper() == "NO":
+                print("Exit")
+                break
+            else:
+                Error("Invalid input. Please enter 'y' or 'n'.")
     elif choice == "3":
         RetrieveEmployee()
-        again = input("\nContinue? (y/n): ")
-        if again.upper() == "Y":
-            AdminChoice()
+        while True:
+            again = input("\nContinue? (y/n): ")
+            if again.upper() == "Y" or again.upper() == "YES":
+                AdminChoice()
+                break
+            elif again.upper() == "N" or again.upper() == "NO":
+                print("Exit")
+                break
+            else:
+                Error("Invalid input. Please enter 'y' or 'n'.")
     elif choice == "4":
         EditEmployee()
-        again = input("\nContinue? (y/n): ")
-        if again.upper() == "Y":
-            AdminChoice()
+        while True:
+            again = input("\nContinue? (y/n): ")
+            if again.upper() == "Y" or again.upper() == "YES":
+                AdminChoice()
+                break
+            elif again.upper() == "N" or again.upper() == "NO":
+                print("Exit")
+                break
+            else:
+                Error("Invalid input. Please enter 'y' or 'n'.")
     elif choice == "5":
         ShowEmployeeData()
-        again = input("\nContinue? (y/n): ")
-        if again.upper() == "Y":
-            AdminChoice()
+        while True:
+            again = input("\nContinue? (y/n): ")
+            if again.upper() == "Y" or again.upper() == "YES":
+                AdminChoice()
+                break
+            elif again.upper() == "N" or again.upper() == "NO":
+                print("Exit")
+                break
+            else:
+                Error("Invalid input. Please enter 'y' or 'n'.")
     elif choice == "6":
          while True:    
             confirm = input("Are you sure you want to exit? (y/n): ")
