@@ -231,15 +231,9 @@ def EditEmployee():
                 file.write(line)
             file.close()
             print("✅ Data successfully updated!")
-<<<<<<< HEAD
         else:
             Error("Employee Not Found")
 
-=======
-            break
-        else:
-            Error("Employee Not Found. Press Enter to try again.")
->>>>>>> refs/remotes/origin/main
 
 
 def ShowEmployeeData():
