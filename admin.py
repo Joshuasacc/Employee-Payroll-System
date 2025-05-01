@@ -73,8 +73,18 @@ def PaySlip(name, ID, role, work_salary, salary_rate):
     print(table)
 
 def AddEmployee():
-    name = input("Enter Employee's Name: ")
-    position = input("Enter your Position: ")
+    while True:
+        name = input("Enter Employee's Name: ").strip()
+        if name:
+            break
+        else:
+            Error("Name cannot be empty. Please enter a valid name.")
+    while True:
+        position = input("Enter Employee's Position: ").strip()
+        if position:
+            break
+        else:
+            Error("Position cannot be empty. Please enter a valid position.")
 
     while True:
         ID = input("Enter your ID (6 digits only): ") 
@@ -160,7 +170,8 @@ def RetrieveEmployee():
         PaySlip(name,ID,role, int(work_salary), int(salary_rate))
 
 def RemoveEmployee(): # Re-structured this
-    remove_ID = input("Enter the Employee ID to remove: ")
+    ShowEmployeeData()
+    remove_ID = input("\nEnter the Employee ID to remove: ")
 
     file = open("Data.txt", "r")
     new_lines = []
@@ -221,7 +232,7 @@ def EditEmployee():
 
                 edited_line = f"{temp[0]},{new_name},{new_position},{new_salary},{new_salary_rate}\n"
                 new_lines.append(edited_line)
-                break
+                does_exist = True
             else:
                 new_lines.append(line)  # Keep unchanged lines
 
@@ -231,9 +242,9 @@ def EditEmployee():
                 file.write(line)
             file.close()
             print("✅ Data successfully updated!")
+            break
         else:
-            Error("Employee Not Found")
-
+            Error("Employee Not Found. Press Enter to try again.")
 
 
 def ShowEmployeeData():
@@ -271,10 +282,10 @@ Enter: """)
         AddEmployee()
         while True:
             again = input("\nContinue? (y/n): ")
-            if again.upper() == "Y" or again.upper() == "YES":
+            if again.upper() == "Y": #or again.upper() == "YES":
                 AdminChoice()
                 break
-            elif again.upper() == "N" or again.upper() == "NO":
+            elif again.upper() == "N": #or again.upper() == "NO":
                 print("Exit")
                 break
             else:
@@ -283,10 +294,10 @@ Enter: """)
         RemoveEmployee()
         while True:
             again = input("\nContinue? (y/n): ")
-            if again.upper() == "Y" or again.upper() == "YES":
+            if again.upper() == "Y": #or again.upper() == "YES":
                 AdminChoice()
                 break
-            elif again.upper() == "N" or again.upper() == "NO":
+            elif again.upper() == "N": #or again.upper() == "NO":
                 print("Exit")
                 break
             else:
@@ -295,10 +306,10 @@ Enter: """)
         RetrieveEmployee()
         while True:
             again = input("\nContinue? (y/n): ")
-            if again.upper() == "Y" or again.upper() == "YES":
+            if again.upper() == "Y": #or again.upper() == "YES":
                 AdminChoice()
                 break
-            elif again.upper() == "N" or again.upper() == "NO":
+            elif again.upper() == "N": #or again.upper() == "NO":
                 print("Exit")
                 break
             else:
@@ -307,10 +318,10 @@ Enter: """)
         EditEmployee()
         while True:
             again = input("\nContinue? (y/n): ")
-            if again.upper() == "Y" or again.upper() == "YES":
+            if again.upper() == "Y": #or again.upper() == "YES":
                 AdminChoice()
                 break
-            elif again.upper() == "N" or again.upper() == "NO":
+            elif again.upper() == "N": #or again.upper() == "NO":
                 print("Exit")
                 break
             else:
@@ -319,10 +330,10 @@ Enter: """)
         ShowEmployeeData()
         while True:
             again = input("\nContinue? (y/n): ")
-            if again.upper() == "Y" or again.upper() == "YES":
+            if again.upper() == "Y": #or again.upper() == "YES":
                 AdminChoice()
                 break
-            elif again.upper() == "N" or again.upper() == "NO":
+            elif again.upper() == "N": #or again.upper() == "NO":
                 print("Exit")
                 break
             else:
